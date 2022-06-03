@@ -28,6 +28,10 @@ def save_text_to_mp3(reddit_obj):
         tts = gTTS(text=comment["comment_body"], lang="en", slow=False)
         tts.save(f"assets/mp3/{idx}.mp3")
         length += MP3(f"assets/mp3/{idx}.mp3").info.length
+        if reddit_obj["thread_selftext"] != "":
+            tts = gTTS(text=reddit_obj["thread_selftext"], lang="en", slow=False)
+            tts.save(f"assets/mp3/selftext.mp3")
+            length += MP3(f"assets/mp3/selftext.mp3").info.length
 
     print_substep("Saved Text to MP3 files successfully.", style="bold green")
     # ! Return the index so we know how many screenshots of comments we need to make.
